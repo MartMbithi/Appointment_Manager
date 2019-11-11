@@ -4,29 +4,36 @@
     //date_default_timezone_set('Africa /Nairobi');
     include('assets/inc/checklogin.php');
     check_login();
-    $aid=$_SESSION['c_id'];
-    if(isset($_POST['Update_Profile']))
-    {
+    $aid=$_SESSION['doc_id'];
 
-            $c_fname=$_POST['c_fname'];
-            $c_mname=$_POST['c_mname'];
-            $c_lname = $_POST['c_lname'];
-            $c_phoneno=$_POST['c_phoneno'];
-            $c_addr=$_POST['c_addr'];
-            $c_email=$_POST['c_email'];
-            //$pass_uname=$_POST['pass_uname'];
-            //$pass_bday=$_POST['pass_bday'];
+            if(isset($_POST['Update_Password']))
+
+    {
+           /*
+            $pass_fname=$_POST['pass_fname'];
+            $pass_lname = $_POST['pass_lname'];
+            $pass_phone=$_POST['pass_phone'];
+            $pass_addr=$_POST['pass_addr'];
+            $pass_email=$_POST['pass_email'];
+            $pass_uname=$_POST['pass_uname'];
+            $pass_bday=$_POST['pass_bday'];
             //$pass_ocupation=$_POST['pass_occupation'];
-            //$pass_bio=($_POST['pass_bio']);
-            //$passwordconf=md5($_POST['passwordconf']);
+            $pass_bio=($_POST['pass_bio']);
+           
             //$date = date('d-m-Y h:i:s', time());
-            $query="update  ams_client set c_fname=?, c_mname=?, c_lname=?, c_phoneno=?, c_addr=?, c_email=? where c_id=?";
+             $pass_dpic=$_FILES["pass_dpic"]["name"];
+		    //$id=intval($_GET['id']);
+		    move_uploaded_file($_FILES["pass_dpic"]["tmp_name"],"assets/img/profile/".$_FILES["pass_dpic"]["name"]);
+            */
+            $aid=$_SESSION['doc_id'];
+            $doc_pwd=(($_POST['doc_pwd']));
+            $query="update ams_doc set doc_pwd = ? where doc_id=?";
             $stmt = $mysqli->prepare($query);
-            $rc=$stmt->bind_param('ssssssi', $c_fname, $c_mname, $c_lname, $c_phoneno, $c_addr, $c_email, $aid);
+            $rc=$stmt->bind_param('si', $doc_pwd, $aid);
             $stmt->execute();
                 if($stmt)
                 {
-                    $succ = "Your Profile Has Been Updated";
+                    $succ1 = "Password  Updated";
                 }
                 else 
                 {
@@ -54,18 +61,18 @@
           <h2 class="page-head-title">Profile </h2>
           <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb page-head-nav">
-              <li class="breadcrumb-item"><a href="client-dashboard.php">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="doc-dashboard.php">Dashboard</a></li>
               <li class="breadcrumb-item"><a href="#">Profile</a></li>
-              <li class="breadcrumb-item active">Update Profile</li>
+              <li class="breadcrumb-item active">Change Password </li>
             </ol>
           </nav>
         </div>
-            <?php if(isset($succ)) {?>
+        <?php if(isset($succ1)) {?>
                                 <!--This code for injecting an alert-->
                 <script>
                             setTimeout(function () 
                             { 
-                                swal("Success!","<?php echo $succ;?>!","success");
+                                swal("Success!","<?php echo $succ1;?>!","success");
                             },
                                 100);
                 </script>
@@ -84,8 +91,8 @@
         <?php } ?>
         <div class="main-content container-fluid">
         <?php
-            $aid=$_SESSION['c_id'];
-            $ret="select * from ams_client where c_id=?";
+            $aid=$_SESSION['doc_id'];
+            $ret="select * from ams_doc where doc_id=?";
             $stmt= $mysqli->prepare($ret) ;
             $stmt->bind_param('i',$aid);
             $stmt->execute() ;//ok
@@ -93,54 +100,33 @@
             //$cnt=1;
             while($row=$res->fetch_object())
         {
-        ?>
-          <div class="row">
+        ?>     
             <div class="col-md-12">
               <div class="card card-border-color card-border-color-primary">
-                <div class="card-header card-header-divider">Update Your Profile<span class="card-subtitle">Fill All Details</span></div>
+                <div class="card-header card-header-divider">Change Password<span class="card-subtitle">Fill All Details</span></div>
                 <div class="card-body">
-                  <form method ="POST">
+                  <form method ="POST" >
                     <div class="form-group row">
-                      <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">My First Name</label>
+                      <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">Old Password</label>
                       <div class="col-12 col-sm-8 col-lg-6">
-                        <input class="form-control" name="c_fname" value="<?php echo $row->c_fname;?>" id="inputText3" type="text">
+                        <input class="form-control" name="" id="inputText3" type="password">
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">My Middle Name</label>
+                      <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">New Password</label>
                       <div class="col-12 col-sm-8 col-lg-6">
-                        <input class="form-control" name="c_mname" value="<?php echo $row->c_mname;?>" id="inputText3" type="text">
+                        <input class="form-control" name="doc_pwd"  id="inputText3" type="password">
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">My Last Name</label>
+                      <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">Confirm New Password</label>
                       <div class="col-12 col-sm-8 col-lg-6">
-                        <input class="form-control" name="c_lname" value="<?php echo $row->c_lname;?>" id="inputText3" type="text">
+                        <input class="form-control" name=""  id="inputText3" type="password">
                       </div>
                     </div>
-                    <div class="form-group row">
-                      <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">My Phone Number</label>
-                      <div class="col-12 col-sm-8 col-lg-6">
-                        <input class="form-control" name="c_phoneno" value="<?php echo $row->c_phoneno;?>" id="inputText3" type="text">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">My Address</label>
-                      <div class="col-12 col-sm-8 col-lg-6">
-                        <input class="form-control" name="c_addr" value="<?php echo $row->c_addr;?>" id="inputText3" type="text">
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">My Email</label>
-                      <div class="col-12 col-sm-8 col-lg-6">
-                        <input class="form-control" name="c_email" value="<?php echo $row->c_email;?>" id="inputText3" type="text">
-                      </div>
-                    </div>                 
-                    
-                    
                     <div class="col-sm-6">
                         <p class="text-right">
-                          <input class="btn btn-space btn-primary" value ="Update Profile" name = "Update_Profile" type="submit">
+                          <input class="btn btn-space btn-primary" value ="Change Password" name = "Update_Password" type="submit">
                           <button class="btn btn-space btn-secondary">Cancel</button>
                         </p>
                       </div>
@@ -149,14 +135,14 @@
                 </div>
               </div>
             </div>
+        </div>
        
         <?php }?>
         
-        </div>
-        <!--footer-->
-        <?php include('assets/inc/footer.php');?>
-        <!--EndFooter-->
       </div>
+      <!--footer-->
+      <?php include('assets/inc/footer.php');?>
+        <!--EndFooter-->
 
     </div>
     <script src="assets/lib/jquery/jquery.min.js" type="text/javascript"></script>

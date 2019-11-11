@@ -1,12 +1,12 @@
 <?php
 function check_login()
 {
-if(strlen($_SESSION['c_id'])==0)
+if(strlen($_SESSION['doc_id'])==0)
 	{
 		$host = $_SERVER['HTTP_HOST'];
 		$uri  = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
-		$extra="client-login.php";
-		$_SESSION["client_id"]="";
+		$extra="doc-login.php";
+		$_SESSION["doc_id"]="";
 		header("Location: http://$host$uri/$extra");
 	}
 }

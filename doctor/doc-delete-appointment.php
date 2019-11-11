@@ -4,8 +4,8 @@
     //date_default_timezone_set('Africa /Nairobi');
     include('assets/inc/checklogin.php');
     check_login();
-    $aid=$_SESSION['c_id'];
-    if(isset($_POST['Update']))
+    $aid=$_SESSION['doc_id'];
+    if(isset($_POST['delete']))
     {
 
             //$c_fname=$_POST['c_fname'];
@@ -14,6 +14,7 @@
             //$c_phoneno=$_POST['c_phoneno'];
             //$c_addr=$_POST['c_addr'];
             //$c_email=$_POST['c_email'];
+            $id = $_GET['c_id'];
             $c_preff_date=$_POST['c_preff_date'];
             $c_speciality = $_POST['c_speciality']; 
             $c_app_speciality=$_POST['c_app_speciality'];
@@ -23,11 +24,11 @@
             //$date = date('d-m-Y h:i:s', time());
             $query="update  ams_client set c_preff_date=?, c_speciality=?, c_app_speciality=? where c_id=?";
             $stmt = $mysqli->prepare($query);
-            $rc=$stmt->bind_param('sssi', $c_preff_date,$c_speciality,$c_app_speciality, $aid);
+            $rc=$stmt->bind_param('sssi', $c_preff_date,$c_speciality,$c_app_speciality, $id);
             $stmt->execute();
                 if($stmt)
                 {
-                    $succ = "Appointment Details Updated";
+                    $succ = "Appointment Cancelled";
                 }
                 else 
                 {
@@ -52,10 +53,10 @@
       <!--End Sidebar-->
       <div class="be-content">
         <div class="page-head">
-          <h2 class="page-head-title">Update Appointments </h2>
+          <h2 class="page-head-title">Make Appointments </h2>
           <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb page-head-nav">
-              <li class="breadcrumb-item"><a href="client-dashboard.php">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="doc-dashboard.php">Dashboard</a></li>
               <li class="breadcrumb-item"><a href="#">Appointments</a></li>
               <li class="breadcrumb-item active">Manage Appointments</li>
             </ol>
@@ -85,7 +86,7 @@
         <?php } ?>
         <div class="main-content container-fluid">
         <?php
-            $aid=$_SESSION['c_id'];
+            $aid=$_GET['c_id'];
             $ret="select * from ams_client where c_id=?";
             $stmt= $mysqli->prepare($ret) ;
             $stmt->bind_param('i',$aid);
@@ -98,100 +99,69 @@
           <div class="row">
             <div class="col-md-12">
               <div class="card card-border-color card-border-color-primary">
-                <div class="card-header card-header-divider">Update Your Appointment Details<span class="card-subtitle">Fill All Details</span></div>
+                <div class="card-header card-header-divider">Make Appointment <span class="card-subtitle">Fill All Details</span></div>
                 <div class="card-body">
                   <form method ="POST">
                     <div class="form-group row">
                       <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">My First Name</label>
                       <div class="col-12 col-sm-8 col-lg-6">
-                        <input class="form-control" name="c_fname" value="<?php echo $row->c_fname;?>" id="inputText3" type="text">
+                        <input class="form-control" name="c_fname" readonly value="<?php echo $row->c_fname;?>" id="inputText3" type="text">
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">My Middle Name</label>
                       <div class="col-12 col-sm-8 col-lg-6">
-                        <input class="form-control" name="c_mname" value="<?php echo $row->c_mname;?>" id="inputText3" type="text">
+                        <input class="form-control" name="c_mname" readonly value="<?php echo $row->c_mname;?>" id="inputText3" type="text">
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">My Last Name</label>
                       <div class="col-12 col-sm-8 col-lg-6">
-                        <input class="form-control" name="c_lname" value="<?php echo $row->c_lname;?>" id="inputText3" type="text">
+                        <input class="form-control" name="c_lname" readonly value="<?php echo $row->c_lname;?>" id="inputText3" type="text">
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">My Phone Number</label>
                       <div class="col-12 col-sm-8 col-lg-6">
-                        <input class="form-control" name="c_phoneno" value="<?php echo $row->c_phoneno;?>" id="inputText3" type="text">
+                        <input class="form-control" name="c_phoneno" readonly value="<?php echo $row->c_phoneno;?>" id="inputText3" type="text">
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">My Address</label>
                       <div class="col-12 col-sm-8 col-lg-6">
-                        <input class="form-control" name="c_addr" value="<?php echo $row->c_addr;?>" id="inputText3" type="text">
+                        <input class="form-control" name="c_addr" readonly value="<?php echo $row->c_addr;?>" id="inputText3" type="text">
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">My Email</label>
                       <div class="col-12 col-sm-8 col-lg-6">
-                        <input class="form-control" name="c_email" value="<?php echo $row->c_email;?>" id="inputText3" type="text">
+                        <input class="form-control" name="c_email" readonly placeholder="<?php echo $row->c_email;?>" id="inputText3" type="text">
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">Preferred Appointment Date</label>
                       <div class="col-12 col-sm-8 col-lg-6">
-                        <input class="form-control" name="c_preff_date"  id="inputText3" type="date">
+                        <input class="form-control" readonly placeholder = "<?php echo $row->c_preff_date;?>" name="c_preff_date"  id="inputText3" type="text">
                       </div>
                     </div>
+
                     <div class="form-group row">
                       <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">Doctor</label>
                       <div class="col-12 col-sm-8 col-lg-6">
-                        <select class="form-control" name="c_speciality">
-                        <?php
-                        /*
-                        *Lets get details of available Doctors!!
-                        */
-                        $ret="SELECT * FROM ams_doc "; //sql code to get all details of doctors.
-                        $stmt= $mysqli->prepare($ret) ;
-                        $stmt->execute() ;//ok
-                        $res=$stmt->get_result();
-                        $cnt=1;
-                        while($row=$res->fetch_object())
-                        {?>
-                          <option name="c_speciality" value="<?php echo $row->doc_fname;?> <?php echo $row->doc_lname;?> " selected><?php echo $row->doc_fname;?>
-                          <?php echo $row->doc_lname;?>
-                          </option> 
-                          <?php }?> 
-
-                        </select>
+                        <input class="form-control" readonly placeholder = "<?php echo $row->c_speciality;?>" name="c_speciality"  id="inputText3" type="text">
                       </div>
-                    </div> 
+                    </div>
+
                     <div class="form-group row">
-                      <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">Apointment Speciality</label>
+                      <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">Speciality</label>
                       <div class="col-12 col-sm-8 col-lg-6">
-                        <select class="form-control" name="c_app_speciality">
-                        <?php
-                        /*
-                        *Lets get details of sPECIALITITES offeref!!
-                        */
-                        $ret="SELECT * FROM ams_speciality "; //sql code to get alldetails 
-                        $stmt= $mysqli->prepare($ret) ;
-                        $stmt->execute() ;//ok
-                        $res=$stmt->get_result();
-                        $cnt=1;
-                        while($row=$res->fetch_object())
-                        {?>
-                          <option name="c_app_speciality" value="<?php echo $row->s_name;?>" selected> <?php echo $row->s_name;?> </option> 
-                          <?php }?> 
-
-                        </select>
+                        <input class="form-control" readonly placeholder = "<?php echo $row->c_app_speciality;?>" name="c_app_speciality"  id="inputText3" type="text">
                       </div>
-                    </div>                 
-                    
-                    
+                    </div>
+                     
                     <div class="col-sm-6">
                         <p class="text-right">
-                          <input class="btn btn-space btn-primary" value ="Submit" name = "Update" type="submit">
+                          <input class="btn btn-space btn-danger" value ="Cancel Appointment" name = "delete" type="submit">
                           <button class="btn btn-space btn-secondary">Cancel</button>
                         </p>
                       </div>

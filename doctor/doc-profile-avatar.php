@@ -4,7 +4,7 @@
     //date_default_timezone_set('Africa /Nairobi');
     include('assets/inc/checklogin.php');
     check_login();
-    $aid=$_SESSION['c_id'];
+    $aid=$_SESSION['doc_id'];
     if(isset($_POST['Update_profile_pic']))
     {
            /*
@@ -20,12 +20,12 @@
             //$passwordconf=md5($_POST['passwordconf']);
             //$date = date('d-m-Y h:i:s', time());
             */
-            $c_dpic=$_FILES["c_dpic"]["name"];
+            $doc_dpic=$_FILES["doc_dpic"]["name"];
 		    //$id=intval($_GET['id']);
-		    move_uploaded_file($_FILES["c_dpic"]["tmp_name"],"assets/img/".$_FILES["c_dpic"]["name"]);
-            $query="update  ams_client set c_dpic = ? where c_id=?";
+		        move_uploaded_file($_FILES["doc_dpic"]["tmp_name"],"assets/img/".$_FILES["doc_dpic"]["name"]);
+            $query="update  ams_doc set doc_dpic = ? where doc_id=?";
             $stmt = $mysqli->prepare($query);
-            $rc=$stmt->bind_param('si', $c_dpic, $aid);
+            $rc=$stmt->bind_param('si', $doc_dpic, $aid);
             $stmt->execute();
                 if($stmt)
                 {
@@ -38,41 +38,6 @@
             #echo"<script>alert('Your Profile Has Been Updated Successfully');</script>";
             }
 
-            if(isset($_POST['Update_Password']))
-
-    {
-           /*
-            $pass_fname=$_POST['pass_fname'];
-            $pass_lname = $_POST['pass_lname'];
-            $pass_phone=$_POST['pass_phone'];
-            $pass_addr=$_POST['pass_addr'];
-            $pass_email=$_POST['pass_email'];
-            $pass_uname=$_POST['pass_uname'];
-            $pass_bday=$_POST['pass_bday'];
-            //$pass_ocupation=$_POST['pass_occupation'];
-            $pass_bio=($_POST['pass_bio']);
-           
-            //$date = date('d-m-Y h:i:s', time());
-             $pass_dpic=$_FILES["pass_dpic"]["name"];
-		    //$id=intval($_GET['id']);
-		    move_uploaded_file($_FILES["pass_dpic"]["tmp_name"],"assets/img/profile/".$_FILES["pass_dpic"]["name"]);
-            */
-            $aid=$_SESSION['pass_id'];
-            $pass_pwd=sha1(md5($_POST['pass_pwd']));
-            $query="update  orrs_passenger set pass_pwd = ? where pass_id=?";
-            $stmt = $mysqli->prepare($query);
-            $rc=$stmt->bind_param('si', $pass_dpic, $aid);
-            $stmt->execute();
-                if($stmt)
-                {
-                    $succ1 = "Password  Updated";
-                }
-                else 
-                {
-                    $err = "Please Try Again Later";
-                }
-            #echo"<script>alert('Your Profile Has Been Updated Successfully');</script>";
-            }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -134,8 +99,8 @@
         <?php } ?>
         <div class="main-content container-fluid">
         <?php
-            $aid=$_SESSION['c_id'];
-            $ret="select * from ams_client where c_id=?";
+            $aid=$_SESSION['doc_id'];
+            $ret="select * from ams_doc where doc_id=?";
             $stmt= $mysqli->prepare($ret) ;
             $stmt->bind_param('i',$aid);
             $stmt->execute() ;//ok
@@ -153,7 +118,7 @@
                     <div class="form-group row">
                       <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">Select A New Profile Picture</label>
                       <div class="col-12 col-sm-8 col-lg-6">
-                        <input class="btn btn-outline-success" name="c_dpic"  id="inputText3" type="file">
+                        <input class="btn btn-outline-success" name="doc_dpic"  id="inputText3" type="file">
                       </div>
                     </div>
                    

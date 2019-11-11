@@ -5,7 +5,7 @@
     //date_default_timezone_set('Africa /Nairobi');
     include('assets/inc/checklogin.php');
     check_login();
-    $aid=$_SESSION['c_id'];
+    $aid=$_SESSION['doc_id'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,7 +35,7 @@
               /**
                * We need to get firstname or username of logged in user!!
                */         
-                $aid=$_SESSION['c_id'];
+                $aid=$_GET['c_id'];
                 $ret="select * from ams_client where c_id=?";
                 $stmt= $mysqli->prepare($ret) ;
                 $stmt->bind_param('i',$aid);

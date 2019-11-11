@@ -54,7 +54,9 @@
 
                   <li class="active" class="parent"><a href="#"><i class="icon mdi mdi-android-messages"></i><span>Mail</span></a>
                     <ul class="sub-menu">
-                      <li><a href="client-mail.php">Messages / Notifications</a>
+                      <li><a href="client-mail.php">Send Mail</a>
+                      </li> 
+                      <li><a href="client-inmail.php">InBox </a>
                       </li>                     
                     </ul>
                   </li>
