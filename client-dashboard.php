@@ -83,7 +83,6 @@
                         <th>#</th>
                         <th>Doctor Name</th>
                         <th>Doctor Department</th>
-                        <th>Doctor Specialization</th>
                         <th>Doctor Status</th>
                         
                       </tr>
@@ -103,7 +102,6 @@
                             <td><?php echo $cnt;?></td>
                             <td><?php echo $row->doc_fname;?> <?php echo $row->doc_lname;?> </td>
                             <td><?php echo $row->doc_dept;?></td>
-                            <td><?php echo $row->doc_spec;?></td>
                             <td><span class="badge badge-success"><?php echo $row->doc_status;?></span></td>
                             
                           </tr>

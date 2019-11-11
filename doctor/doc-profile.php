@@ -3,7 +3,7 @@
     include('assets/inc/config.php');
     include('assets/inc/checklogin.php');
     check_login();
-    $aid=$_SESSION['c_id'];
+    $aid=$_SESSION['doc_id'];
 ?>
 
 <!DOCTYPE html>
@@ -25,8 +25,8 @@
 
         <!--Server Side Scrit To Fetch all details of logged in user-->
         <?php
-            $aid=$_SESSION['c_id'];//Assaign session variable to passenger ID
-            $ret="select * from ams_client where c_id=?"; //sELECT ALL FROM PASSENGERS WHERE PASSENGER ID IS THE LOGGED ONE
+            $aid=$_SESSION['doc_id'];//Assaign session variable to passenger ID
+            $ret="select * from ams_doc where doc_id=?"; //sELECT ALL FROM PASSENGERS WHERE PASSENGER ID IS THE LOGGED ONE
             $stmt= $mysqli->prepare($ret) ;
             $stmt->bind_param('i',$aid);
             $stmt->execute() ;//ok
@@ -42,11 +42,11 @@
             <div class="row">
               <div class="col-lg-12">
                 <div class="user-display">
-                  <div class="user-display-bg"><img src="assets/img/<?php echo $row->c_dpic;?>" alt="Profile Background"></div>
+                  <div class="user-display-bg"><img src="assets/img/<?php echo $row->doc_dpic;?>" alt="Profile Background"></div>
                   <div class="user-display-bottom">
-                    <div class="user-display-avatar"><img src="assets/img/<?php echo $row->c_dpic;?>" alt="Avatar"></div>
+                    <div class="user-display-avatar"><img src="assets/img/<?php echo $row->doc_dpic;?>" alt="Avatar"></div>
                     <div class="user-display-info">
-                      <div class="name"><?php echo $row->c_fname;?> <?php echo $row->c_lname;?> </div>
+                      <div class="name"><?php echo $row->doc_fname;?> <?php echo $row->doc_lname;?> </div>
                     </div>
                     
                   </div>
@@ -59,19 +59,13 @@
                         <tr>
                           <td class="icon"><span class="mdi mdi-cake"></span></td>
                           <td class="item">Email<span class="icon s7-gift"></span></td>
-                          <td><?php echo $row->c_email;?></td>
+                          <td><?php echo $row->doc_email;?></td>
                         </tr>
                         <tr>
                           <td class="icon"><span class="mdi mdi-smartphone-android"></span></td>
                           <td class="item">Mobile<span class="icon s7-phone"></span></td>
-                          <td><?php echo $row->c_phoneno;?></td>
-                        </tr>
-                        <tr>
-                          <td class="icon"><span class="mdi mdi-globe-alt"></span></td>
-                          <td class="item">Location<span class="icon s7-map-marker"></span></td>
-                          <td><?php echo $row->c_addr;?></td>
-                        </tr>
-                        
+                          <td><?php echo $row->doc_phone;?></td>
+                        </tr>                        
                       </tbody>
                     </table>
                   </div>

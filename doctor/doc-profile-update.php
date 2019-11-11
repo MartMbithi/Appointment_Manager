@@ -4,30 +4,29 @@
     //date_default_timezone_set('Africa /Nairobi');
     include('assets/inc/checklogin.php');
     check_login();
-    $aid=$_SESSION['c_id'];
+    $aid=$_SESSION['doc_id'];
     if(isset($_POST['Update_Profile']))
     {
 
-            //$c_fname=$_POST['c_fname'];
-            //$c_mname=$_POST['c_mname'];
-            //$c_lname = $_POST['c_lname'];
-            //$c_phoneno=$_POST['c_phoneno'];
-            //$c_addr=$_POST['c_addr'];
-            //$c_email=$_POST['c_email'];
-            $c_preff_date=$_POST['c_preff_date'];
-            $c_speciality = $_POST['c_speciality']; 
-            $c_app_speciality=$_POST['c_app_speciality'];
+            $doc_fname=$_POST['doc_fname'];
+            //$doc_mname=$_POST['doc_mname'];
+            $doc_lname = $_POST['doc_lname'];
+            $doc_phone=$_POST['doc_phone'];
+            $doc_addr=$_POST['doc_addr'];
+            $doc_email=$_POST['doc_email'];
+            //$pass_uname=$_POST['pass_uname'];
+            //$pass_bday=$_POST['pass_bday'];
             //$pass_ocupation=$_POST['pass_occupation'];
             //$pass_bio=($_POST['pass_bio']);
             //$passwordconf=md5($_POST['passwordconf']);
             //$date = date('d-m-Y h:i:s', time());
-            $query="update  ams_client set c_preff_date=?, c_speciality=?, c_appoint_stats='Pending', c_app_speciality=? where c_id=?";
+            $query="update  ams_doc set doc_fname=?, doc_lname=?, doc_phone=?, doc_addr=?,doc_email=? where doc_id=?";
             $stmt = $mysqli->prepare($query);
-            $rc=$stmt->bind_param('sssi', $c_preff_date,$c_speciality,$c_speciality, $aid);
+            $rc=$stmt->bind_param('sssssi', $doc_fname,  $doc_lname, $doc_phone, $doc_addr, $doc_email, $aid);
             $stmt->execute();
                 if($stmt)
                 {
-                    $succ = "Appointment Submitted";
+                    $succ = "Your Profile Has Been Updated";
                 }
                 else 
                 {
@@ -52,12 +51,12 @@
       <!--End Sidebar-->
       <div class="be-content">
         <div class="page-head">
-          <h2 class="page-head-title">Make Appointments </h2>
+          <h2 class="page-head-title">Profile </h2>
           <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb page-head-nav">
-              <li class="breadcrumb-item"><a href="client-dashboard.php">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="#">Appointments</a></li>
-              <li class="breadcrumb-item active">Make Appointments</li>
+              <li class="breadcrumb-item"><a href="doc-dashboard.php">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="#">Profile</a></li>
+              <li class="breadcrumb-item active">Update Profile</li>
             </ol>
           </nav>
         </div>
@@ -85,8 +84,8 @@
         <?php } ?>
         <div class="main-content container-fluid">
         <?php
-            $aid=$_SESSION['c_id'];
-            $ret="select * from ams_client where c_id=?";
+            $aid=$_SESSION['doc_id'];
+            $ret="select * from ams_doc where doc_id=?";
             $stmt= $mysqli->prepare($ret) ;
             $stmt->bind_param('i',$aid);
             $stmt->execute() ;//ok
@@ -98,101 +97,45 @@
           <div class="row">
             <div class="col-md-12">
               <div class="card card-border-color card-border-color-primary">
-                <div class="card-header card-header-divider">Make Appointment <span class="card-subtitle">Fill All Details</span></div>
+                <div class="card-header card-header-divider">Update Your Profile<span class="card-subtitle">Fill All Details</span></div>
                 <div class="card-body">
                   <form method ="POST">
                     <div class="form-group row">
                       <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">My First Name</label>
                       <div class="col-12 col-sm-8 col-lg-6">
-                        <input class="form-control" name="c_fname" value="<?php echo $row->c_fname;?>" id="inputText3" type="text">
+                        <input class="form-control" name="doc_fname" value="<?php echo $row->doc_fname;?>" id="inputText3" type="text">
                       </div>
                     </div>
-                    <div class="form-group row">
-                      <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">My Middle Name</label>
-                      <div class="col-12 col-sm-8 col-lg-6">
-                        <input class="form-control" name="c_mname" value="<?php echo $row->c_mname;?>" id="inputText3" type="text">
-                      </div>
-                    </div>
+                    
                     <div class="form-group row">
                       <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">My Last Name</label>
                       <div class="col-12 col-sm-8 col-lg-6">
-                        <input class="form-control" name="c_lname" value="<?php echo $row->c_lname;?>" id="inputText3" type="text">
+                        <input class="form-control" name="doc_lname" value="<?php echo $row->doc_lname;?>" id="inputText3" type="text">
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">My Phone Number</label>
                       <div class="col-12 col-sm-8 col-lg-6">
-                        <input class="form-control" name="c_phoneno" value="<?php echo $row->c_phoneno;?>" id="inputText3" type="text">
+                        <input class="form-control" name="doc_phone" value="<?php echo $row->doc_phone;?>" id="inputText3" type="text">
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">My Address</label>
                       <div class="col-12 col-sm-8 col-lg-6">
-                        <input class="form-control" name="c_addr" value="<?php echo $row->c_addr;?>" id="inputText3" type="text">
+                        <input class="form-control" name="doc_addr" value="<?php echo $row->doc_addr;?>" id="inputText3" type="text">
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">My Email</label>
                       <div class="col-12 col-sm-8 col-lg-6">
-                        <input class="form-control" name="c_email" value="<?php echo $row->c_email;?>" id="inputText3" type="text">
+                        <input class="form-control" name="doc_email" value="<?php echo $row->doc_email;?>" id="inputText3" type="text">
                       </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">Preferred Appointment Date</label>
-                      <div class="col-12 col-sm-8 col-lg-6">
-                        <input class="form-control" name="c_preff_date"  id="inputText3" type="date">
-                      </div>
-                    </div>
-
-                    <div class="form-group row">
-                      <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">Doctor</label>
-                      <div class="col-12 col-sm-8 col-lg-6">
-                        <select class="form-control" name="c_speciality">
-                        <?php
-                        /*
-                        *Lets get details of available Doctors!!
-                        */
-                        $ret="SELECT * FROM ams_doc "; //sql code to get all details of doctors.
-                        $stmt= $mysqli->prepare($ret) ;
-                        $stmt->execute() ;//ok
-                        $res=$stmt->get_result();
-                        $cnt=1;
-                        while($row=$res->fetch_object())
-                        {?>
-                          <option name="c_speciality" value="<?php echo $row->doc_fname;?> <?php echo $row->doc_lname;?> " selected><?php echo $row->doc_fname;?>
-                          <?php echo $row->doc_lname;?>
-                          </option> 
-                          <?php }?> 
-
-                        </select>
-                      </div>
-                    </div>   
-
-                    <div class="form-group row">
-                      <label class="col-12 col-sm-3 col-form-label text-sm-right" for="inputText3">Apointment Speciality</label>
-                      <div class="col-12 col-sm-8 col-lg-6">
-                        <select class="form-control" name="c_app_speciality">
-                        <?php
-                        /*
-                        *Lets get details of sPECIALITITES offeref!!
-                        */
-                        $ret="SELECT * FROM ams_speciality "; //sql code to get alldetails 
-                        $stmt= $mysqli->prepare($ret) ;
-                        $stmt->execute() ;//ok
-                        $res=$stmt->get_result();
-                        $cnt=1;
-                        while($row=$res->fetch_object())
-                        {?>
-                          <option name="c_app_speciality" value="<?php echo $row->s_name;?>" selected> <?php echo $row->s_name;?> </option> 
-                          <?php }?> 
-
-                        </select>
-                      </div>
-                    </div> 
+                    </div>                 
+                    
                     
                     <div class="col-sm-6">
                         <p class="text-right">
-                          <input class="btn btn-space btn-primary" value ="Submit" name = "Update_Profile" type="submit">
+                          <input class="btn btn-space btn-primary" value ="Update Profile" name = "Update_Profile" type="submit">
                           <button class="btn btn-space btn-secondary">Cancel</button>
                         </p>
                       </div>

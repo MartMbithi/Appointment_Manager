@@ -23,12 +23,12 @@
 
       <div class="be-content">
       <div class="page-head">
-          <h2 class="page-head-title">Manage Appointments</h2>
+          <h2 class="page-head-title">Mail</h2>
           <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb page-head-nav">
               <li class="breadcrumb-item"><a href="client-dashboard.php">Dashboard</a></li>
-              <li class="breadcrumb-item"><a href="">Appointments</a></li>
-              <li class="breadcrumb-item active">Manage Appointments</li>
+              <li class="breadcrumb-item"><a href="">Mail</a></li>
+              <li class="breadcrumb-item active">InBox</li>
             </ol>
           </nav>
         </div>
@@ -38,63 +38,35 @@
             <div class="col-sm-12">
               <div class="card card-table">
               
-              <?php
-              /**
-               * We need to get firstname or username of logged in user!!
-               */         
-                $aid=$_SESSION['c_id'];
-                $ret="select * from ams_client where c_id=?";
-                $stmt= $mysqli->prepare($ret) ;
-                $stmt->bind_param('i',$aid);
-                $stmt->execute() ;//ok
-                $res=$stmt->get_result();
-                //$cnt=1;
-                while($row=$res->fetch_object())
-                 {
-                    ?>
-                <div class="card-header"><?php echo $row->c_fname;?> <?php echo $row->c_lname;?>This Is Your Appointment!   
-                <?php }?>             
+              
+                <div class="card-header">Inbox
+                            
                 </div>
 
                 <div class="card-body">
                   <table class="table table-striped table-hover table-fw-widget" id="table1">
                     <thead>
                       <tr>
-                        <th>My Name</th>
-                        <th>Email Address</th>
-                        <th>Address</th>
-                        <th>Prefered Appointment Date</th>
-                        <th>Speciality</th>
-                        <th>Doctor</th>
-                        <th>Action</th>
+                        <th>Send Message</th>
+                        <th>Reply</th>
                       </tr>
                     </thead>
                     <tbody>
-                        <?php
-                        /**
-                         *Lets select details of
-                         */
-                            //$aid=$_SESSION['pass_id'];
-                            $ret="select * from ams_client where c_id=?";//sql to get details of our user
-                            $stmt= $mysqli->prepare($ret) ;
-                            $stmt->bind_param('i',$aid);
-                            $stmt->execute() ;//ok
-                            $res=$stmt->get_result();
-                            //$cnt=1;
+                    <?php
+                        $aid=$_SESSION['c_id'];
+                        $ret="select * from ams_client where c_id=?";
+                        $stmt= $mysqli->prepare($ret) ;
+                        $stmt->bind_param('i',$aid);
+                        $stmt->execute() ;//ok
+                        $res=$stmt->get_result();
+                        //$cnt=1;
                         while($row=$res->fetch_object())
-                        {
-                        ?>
+                    {
+                    ?>
+
                       <tr class="odd gradeX even gradeC odd gradeA even gradeA ">
-                        <td><?php echo $row->c_fname;?> <?php echo $row->c_mname;?> <?php echo $row->c_lname;?> </td>
-                        <td><?php echo $row->c_email;?></td>
-                        <td class="center"><?php echo $row->c_addr;?></td>
-                        <td class="center"><span class="badge badge-pill badge-success"><?php echo $row->c_preff_date;?></span></td>
-                        <td><?php echo $row->c_app_speciality;?></td>
-                        <td><?php echo $row->c_speciality;?></td>
-                        <td class="center"><a class ="badge badge-success" href ="client-update-appointment.php?c_id=<?php echo $row->c_id;?>">Update</a> 
-                            <a class ="badge badge-danger" href ="client-delete-appointment.php?c_id=<?php echo $row->c_id;?>">Cancel</a>
-                            <a class ="badge badge-primary" href ="client-view-appointment-status.php?c_id=<?php echo $row->c_id;?>">View</a>
-                        </td> 
+                        <td class="center"><?php echo $row->c_notification;?></td>
+                        <td class="center"><?php echo $row->c_reply;?></a></td> 
                       </tr>
                         <?php }?>
                     </tbody>

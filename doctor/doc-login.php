@@ -2,21 +2,21 @@
 <?php
     session_start();
     include('assets/inc/config.php');//get configuration file
-    if(isset($_POST['client_login']))
+    if(isset($_POST['doc_login']))
     {
-      $c_email=$_POST['c_email'];
-      $c_pwd=($_POST['c_pwd']);//double encrypt to increase security
-      $stmt=$mysqli->prepare("SELECT c_email, c_pwd, c_id FROM ams_client WHERE c_email=? and c_pwd=? ");//sql to log in user
-      $stmt->bind_param('ss',$c_email,$c_pwd);//bind fetched parameters
+      $doc_email=$_POST['doc_email'];
+      $doc_pwd=($_POST['doc_pwd']);//double encrypt to increase security
+      $stmt=$mysqli->prepare("SELECT doc_email, doc_pwd, doc_id FROM ams_doc WHERE doc_email=? and doc_pwd=? ");//sql to log in user
+      $stmt->bind_param('ss',$doc_email,$doc_pwd);//bind fetched parameters
       $stmt->execute();//execute bind
-      $stmt -> bind_result($c_email,$c_pwd,$c_id);//bind result
+      $stmt -> bind_result($doc_email,$doc_pwd,$doc_id);//bind result
       $rs=$stmt->fetch();
-      $_SESSION['c_id']=$c_id;//assaign session to passenger id
+      $_SESSION['doc_id']=$doc_id;//assaign session to passenger id
       //$uip=$_SERVER['REMOTE_ADDR'];
       //$ldate=date('d/m/Y h:i:s', time());
       if($rs)
       {//if its sucessfull
-        header("location:client-dashboard.php");
+        header("location:doc-dashboard.php");
       }
 
       else
@@ -67,21 +67,20 @@
                   <div class="login-form ">
 
                     <div class="form-group">
-                      <input class="form-control" name="c_email" type="text" placeholder="Email" autocomplete="off">
+                      <input class="form-control" name="doc_email" type="text" placeholder="Email" autocomplete="off">
                     </div>
 
                     <div class="form-group">
-                      <input class="form-control" name="c_pwd" type="password" placeholder="Password">
+                      <input class="form-control" name="doc_pwd" type="password" placeholder="Password">
                     </div>
 
                     <div class="form-group row login-tools">
                       
-                      <div class="col-6 login-forgot-password"><a href="client-pwd-forgot.php">Forgot Password?</a></div>
+                      <div class="col-6 login-forgot-password"><a href="doc-pwd-forgot.php">Forgot Password?</a></div>
                     </div>
 
                     <div class="form-group row login-submit">
-                      <div class="col-6"><a class="btn btn-secondary btn-xl" href="client-signup.php">Register</a></div>
-                      <div class="col-6"><input type = "submit" name ="client_login" class="btn btn-primary btn-xl" value ="Log In"></div>
+                      <div class="col-6"><input type = "submit" name ="doc_login" class="btn btn-primary btn-xl" value ="Log In"></div>
                     </div>
                     
                   </div>
