@@ -26,7 +26,7 @@
 		    move_uploaded_file($_FILES["pass_dpic"]["tmp_name"],"assets/img/profile/".$_FILES["pass_dpic"]["name"]);
             */
             $aid=$_SESSION['a_id'];
-            $doc_pwd=(($_POST['a_pwd']));
+            $a_pwd=(($_POST['a_pwd']));
             $query="update ams_admin set a_pwd = ? where a_id=?";
             $stmt = $mysqli->prepare($query);
             $rc=$stmt->bind_param('si', $a_pwd, $aid);
