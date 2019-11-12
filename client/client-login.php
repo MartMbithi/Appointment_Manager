@@ -88,9 +88,9 @@
                 <!--End Login-->
               </div>
             </div>
-            <div class="splash-footer"><a href = "">Home</a></div>
+            <div class="splash-footer"><a href = "../index.php">Home</a></div>
 
-            <div class="splash-footer">&copy; 2019 - <?php echo date ('Y');?> Orion Railway Reservation System | Powered By <a href = "https://martmbithi.github.io" target ="_blank" >MartDevelopers</a></div>
+            <div class="splash-footer">&copy; 2019 - <?php echo date ('Y');?> Apointment Management System | Powered By <a href = "https://martmbithi.github.io" target ="_blank" >TomHastings</a></div>
           </div>
         </div>
       </div>
