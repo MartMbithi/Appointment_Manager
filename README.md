@@ -2,10 +2,9 @@
 Appointment Management System(AMS)  is a web based appointment management system crafted using core php.
 <hr>
 <b>Screenshots</b><br>
-<b>1</b>![main screen 1](https://github.com/MartMbithi/TMS/blob/master/5.png)<br>
-<b>2</b>![main screen 1](https://github.com/MartMbithi/TMS/blob/master/6.png)<br>
-<b>3</b>![main screen 1](https://github.com/MartMbithi/TMS/blob/master/7.png)<br>
-<b>4</b>![main screen 1](https://github.com/MartMbithi/TMS/blob/master/8.png)<br>
+<b>1</b>![main screen 1](https://github.com/MartMbithi/Appointment_Manager/blob/master/1.png)<br>
+<b>2</b>![main screen 1](https://github.com/MartMbithi/Appointment_Manager/blob/master/2.png)<br>
+<b>3</b>![main screen 1](https://github.com/MartMbithi/Appointment_Manager/blob/master/3.png)<br>
 <hr>
 <b>Login Credentials</b><br>
 <b> 1.Admin Acoount</b>
