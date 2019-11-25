@@ -4,7 +4,7 @@
     //date_default_timezone_set('Africa /Nairobi');
     include('assets/inc/checklogin.php');
     check_login();
-    $aid=$_SESSION['doc_id'];
+    $aid=$_SESSION['a_id'];
     if(isset($_POST['reply']))
     {
 

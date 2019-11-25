@@ -84,17 +84,7 @@
 
         <?php } ?>
         <div class="main-content container-fluid">
-        <?php
-            $aid=$_GET['s_id'];
-            $ret="select * from ams_secretary where s_id=?";
-            $stmt= $mysqli->prepare($ret) ;
-            $stmt->bind_param('i',$aid);
-            $stmt->execute() ;//ok
-            $res=$stmt->get_result();
-            //$cnt=1;
-            while($row=$res->fetch_object())
-        {
-        ?>
+        
           <div class="row">
             <div class="col-md-12">
               <div class="card card-border-color card-border-color-primary">
@@ -152,7 +142,6 @@
                 </div>
               </div>
             </div>
-        <?php }?>
         
         </div>
         <!--footer-->

@@ -50,7 +50,8 @@
                 <nav id="main-nav" class="main-nav">
                     <ul class="menu">                        
                         <li><a href="index.php">Home</a></li>
-                        
+
+                        <li><a href="client/client-login.php">Client</a></li>
                         <li class="menu-item-has-children"><a href="#">Staff Login</a>
                             <ul class="sub-menu">
                                 <li><a href="admin/doc-login.php">Administrator</a></li> 
@@ -181,7 +182,7 @@
             <div class="bottom-bar-content">
                 <div id="copyright">
                     &copy; <?php echo date('Y');?> Appointment Management System, All rights reserved | Powered By
-                        <a href="https://martmbithi.github.io" target="_blank">MartDevelopers X TomHastings Munene</a>
+                        <a href="https://martmbithi.github.io" target="_blank">MartDevelopers</a>
                 </div><!-- /#copyright -->
             </div><!-- /.bottom-bar-content -->
         </div>

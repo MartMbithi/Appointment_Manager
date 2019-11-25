@@ -24,7 +24,7 @@
           <div class="row">
           <!--Dashboard BreadCumbs-->
             <div class="col-12 col-lg-6 col-xl-3">
-              <a href = "cient-profile.php">
+              <a href = "client-profile.php">
                   <div class="widget widget-tile">
                     <div class="chart sparkline"><i class="material-icons">account_circle</i></div>
                     <div class="data-info">
